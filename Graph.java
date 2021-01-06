@@ -1,16 +1,11 @@
 import java.util.*;
 
-class Node {
-  String data;
-
-  Node(String data) {
-    this.data = data;
-  }
-}
-
-class Graph {
+public class Graph {
   private Map<Node, List<Node>> adjacentNodes;
 
+  Graph() {
+    this.adjacentNodes = new HashMap<Node, List<Node>>();
+  }
   void addNode(String input) {
     adjacentNodes.putIfAbsent(new Node(input), new ArrayList<>());
 
@@ -22,6 +17,7 @@ class Graph {
     adjacentNodes.remove(new Node(input));
 
   }
+
   // Get nodes adjacent to given node
   List<Node> getAdjacentNodes(String data) {
     return adjacentNodes.get(new Node(data));
@@ -52,9 +48,11 @@ class Graph {
     }
 
   }
+
   // Creates example graph to be used in testing
   Graph createGraph() {
     Graph graph = new Graph();
+
     graph.addNode("Bob");
     graph.addNode("Alice");
     graph.addNode("Mark");
@@ -70,6 +68,7 @@ class Graph {
 
     return graph;
   }
+
   // Depth-first graph traversing method
   Set<String> dfsTraversal(Graph graph, String root) {
     Set<String> seen = new LinkedHashSet<String>();
@@ -89,6 +88,7 @@ class Graph {
 
     return seen;
   }
+
   // Breadth-first graph traversing method
   Set<String> bfsTraversal(Graph graph, String root) {
     Set<String> seen = new LinkedHashSet<String>();
@@ -109,6 +109,73 @@ class Graph {
     return seen;
   }
 
+  String displayGraph() {
+    StringBuffer sb = new StringBuffer();
+    for (Node n : adjacentNodes.keySet()) {
+      sb.append(n);
+      sb.append(adjacentNodes.get(n));
+    }
 
+    return sb.toString();
+  }
 
+  class Node {
+    String data;
+
+    Node(String data) {
+      this.data = data;
+    }
+
+    @Override
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+
+      result = prime * result + getOuterType().hashCode();
+      result = prime * result + ((data == null) ? 0 : data.hashCode());
+      
+      return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj) {
+        return true;
+      }
+
+      if (obj == null) {
+        return false;
+      }
+
+      if (getClass() != obj.getClass()) {
+        return false;
+      }
+
+      Node node = (Node) obj;
+
+      if (!getOuterType().equals(node.getOuterType())) {
+        return false;
+      }
+
+      if (data == null) {
+        if (node.data != null) {
+          return false;
+        }
+      } else if (!data.equals(node.data)) {
+        return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public String toString() {
+      return data;
+    }
+
+    private Graph getOuterType() {
+      return Graph.this;
+    }
+
+  }
 }
