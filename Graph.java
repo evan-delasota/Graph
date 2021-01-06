@@ -22,7 +22,7 @@ class Graph {
     adjacentNodes.remove(new Node(input));
 
   }
-
+  // Get nodes adjacent to given node
   List<Node> getAdjacentNodes(String data) {
     return adjacentNodes.get(new Node(data));
   }
@@ -52,7 +52,7 @@ class Graph {
     }
 
   }
-
+  // Creates example graph to be used in testing
   Graph createGraph() {
     Graph graph = new Graph();
     graph.addNode("Bob");
@@ -70,7 +70,7 @@ class Graph {
 
     return graph;
   }
-
+  // Depth-first graph traversing method
   Set<String> dfsTraversal(Graph graph, String root) {
     Set<String> seen = new LinkedHashSet<String>();
     Stack<String> stack = new Stack<String>();
@@ -89,7 +89,7 @@ class Graph {
 
     return seen;
   }
-
+  // Breadth-first graph traversing method
   Set<String> bfsTraversal(Graph graph, String root) {
     Set<String> seen = new LinkedHashSet<String>();
     Queue<String> queue = new LinkedList<String>();
