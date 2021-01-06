@@ -6,6 +6,7 @@ public class Graph {
   Graph() {
     this.adjacentNodes = new HashMap<Node, List<Node>>();
   }
+
   void addNode(String input) {
     adjacentNodes.putIfAbsent(new Node(input), new ArrayList<>());
 
@@ -47,26 +48,6 @@ public class Graph {
       edgeNode2.remove(n1);
     }
 
-  }
-
-  // Creates example graph to be used in testing
-  Graph createGraph() {
-    Graph graph = new Graph();
-
-    graph.addNode("Bob");
-    graph.addNode("Alice");
-    graph.addNode("Mark");
-    graph.addNode("Rob");
-    graph.addNode("Marie");
-
-    graph.addEdge("Bob", "Alice");
-    graph.addEdge("Bob", "Rob");
-    graph.addEdge("Alice", "Mark");
-    graph.addEdge("Rob", "Mark");
-    graph.addEdge("Alice", "Maria");
-    graph.addEdge("Rob", "Maria");
-
-    return graph;
   }
 
   // Depth-first graph traversing method
@@ -113,7 +94,7 @@ public class Graph {
     StringBuffer sb = new StringBuffer();
     for (Node n : adjacentNodes.keySet()) {
       sb.append(n);
-      sb.append(adjacentNodes.get(n));
+      sb.append(adjacentNodes.get(n) + "\n");
     }
 
     return sb.toString();
@@ -176,6 +157,5 @@ public class Graph {
     private Graph getOuterType() {
       return Graph.this;
     }
-
   }
 }
